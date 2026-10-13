@@ -17,4 +17,50 @@ public class ExplorerSearchTest {
 
     // Add more tests here!
     // Come up with varied cases
+    @Test
+    public void testExplorerLocation_centerOfGrid() {
+        int[][] island = {
+            {1, 1, 1},
+            {1, 0, 1},
+            {1, 1, 1}
+        };
+        int[] expected = {1, 1};
+        assertArrayEquals(expected, ExplorerSearch.explorerLocation(island));
+    }
+
+    @Test
+    public void testExplorerLocation_topLeftCorner() {
+        int[][] island = {
+            {0, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1}
+        };
+        int[] expected = {0, 0};
+        assertArrayEquals(expected, ExplorerSearch.explorerLocation(island));
+    }
+
+    @Test
+    public void testSalamanderLocation_notFound_throwsException() {
+        int[][] island = {
+            {1, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1}
+        };
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            ExplorerSearch.explorerLocation(island);
+        });
+        assertEquals("No explorer present", exception.getMessage());
+    }
+
+
+    @Test
+    public void testExplorerLocation_at_1_2() {
+        int[][] island = {
+            {1, 1, 1},
+            {1, 1, 0},
+            {1, 1, 1}
+        };
+        int[] expected = {1, 2};
+        assertArrayEquals(expected, ExplorerSearch.explorerLocation(island));
+    }
 }
