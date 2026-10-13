@@ -30,6 +30,26 @@ public class ExplorerSearch {
      */
     public static int reachableArea(int[][] island) {
         int[] start = explorerLocation(island);
+        int[][] visited = new int[island.length][island[0].length];
+        return reachableArea(island, start, visited);
+    }
+
+    public static int reachableArea(int[][] island, int[] current, int[][] visited){
+        int curR = current[0];
+        int curC = current[1];
+        int reached = 1;
+
+        if(visited[curR][curC] ==1 ) return 0;
+        visited[curR][curC] = 1;
+
+        for(int[] move : possibleMoves(island, current)){
+            int newR = move[0];
+            int newC = move[1];
+
+            if(visited[newR][newC] == 0) reached+=reachableArea(island, move, visited);
+        }
+
+        return reached;
     }
 
     public static int[] explorerLocation(int[][] island){
