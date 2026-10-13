@@ -40,4 +40,39 @@ public class ExplorerSearch {
         }
         throw new IllegalArgumentException("No explorer present");
     }
+
+    public static List<int[]> possibleMoves(int[][] island, int[] current){
+        int curR = current[0];
+        int curC = current[1];
+        
+        int newR, newC;
+        List<int[]> possible = new ArrayList<>();
+
+        //up
+        newR = curR -1;
+        newC = curC;
+        if(newR >= 0 && island[newR][newC] != 2 && island[newR][newC] != 3){
+            possible.add(new int[] {newR, newC});
+        }
+        //down
+        newR = curR +1;
+        newC = curC;
+        if(newR < island.length && island[newR][newC] != 2 && island[newR][newC] != 3){
+            possible.add(new int[] {newR, newC});
+        }
+        //left
+        newR = curR;
+        newC = curC -1;
+        if(newC >= 0 && island[newR][newC] != 2 && island[newR][newC] != 3){
+            possible.add(new int[] {newR, newC});
+        }
+        //right
+        newR = curR;
+        newC = curC+1;
+        if(newC < island[newR].length && island[newR][newC] != 2 && island[newR][newC] != 3){
+            possible.add(new int[] {newR, newC});
+        }
+
+        return possible;
+    }
 }
